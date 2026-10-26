@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trimskit AntiCheat — Premium Documentation & Interactive Wiki</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#060911',
+                            900: '#0a0e17',
+                            800: '#111827',
+                            700: '#1f293d',
+                            600: '#2d3b55'
+                        },
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            400accent: '#00f0ff'
+                        },
+                        neon: {
+                            blue: '#3b82f6',
+                            cyan: '#00f0ff',
+                            purple: '#8b5cf6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0e17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff33;
+        }
+
+        /* Glassmorphism & Cyber Effects */
+        .cyber-glass {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.12);
+        }
+        
+        .cyber-glass-card {
+            background: linear-gradient(135deg, rgba(31, 41, 61, 0.5) 0%, rgba(17, 24, 39, 0.7) 100%);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cyber-glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .cyber-glow {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+        }
+
+        .grid-bg {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+            background-size: 100% 4px;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 15px rgba(0,240,255,0.4)); }
+            50% { opacity: 0.8; filter: drop-shadow(0 0 25px rgba(0,240,255,0.7)); }
+        }
+
+        .animate-shield-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Active Navigation Link */
+        .nav-link.active {
+            color: #00f0ff;
+            background: rgba(0, 240, 255, 0.08);
+            border-left: 3px solid #00f0ff;
+        }
+
+        /* Code block syntax styling */
+        .code-keyword { color: #f472b6; }
+        .code-string { color: #34d399; }
+        .code-comment { color: #6b7280; font-style: italic; }
+        .code-number { color: #fbbf24; }
+        .code-prop { color: #38bdf8; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-shield-glow, .cyber-glass-card:hover {
+                animation: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-navy-950 text-slate-200 font-sans antialiased min-h-screen selection:bg-cyan-500/30 selection:text-cyan-400">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 w-full cyber-glass border-b border-navy-700/60 bg-navy-950/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Brand & Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="relative w-9 h-9 flex items-center justify-center">
+                        <svg class="w-9 h-9 text-cyan-400 animate-shield-glow" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 5 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 Z" fill="#0f172a" stroke="#00f0ff" stroke-width="6" />
+                            <path d="M30 35 H70 V48 H57 V90 H43 V48 H30 Z" fill="#00f0ff"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-wider text-white font-mono">TRIMSKIT<span class="text-cyan-400">.AC</span></span>
+                        <span class="hidden sm:inline-block text-xs text-slate-400 ml-2 px-2 py-0.5 rounded bg-navy-800 border border-navy-700 font-mono">Fabric 1.21+</span>
+                    </div>
+                </div>
+
+                <!-- Global Search Trigger & Quick Links -->
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <button onclick="openSearchModal()" class="flex items-center space-x-2 text-xs sm:text-sm bg-navy-900 border border-navy-700 hover:border-cyan-500/50 text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-lg transition-all shadow-inner w-44 sm:w-64 justify-between">
+                        <span class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <span>Search wiki...</span>
+                        </span>
+                        <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-navy-800 text-slate-400 rounded border border-navy-700">Ctrl+K</kbd>
+                    </button>
+
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-400 hover:text-cyan-400 hover:bg-navy-800 rounded-lg transition" title="GitHub Repository (Placeholder)">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    </a>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuBtn" onclick="toggleMobileSidebar()" class="lg:hidden p-2 text-slate-400 hover:text-white rounded-lg focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- SIDEBAR NAVIGATION -->
+            <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-72 bg-navy-900 border-r border-navy-700 p-6 transform -translate-x-full lg:translate-x-0 lg:static lg:w-64 lg:bg-transparent lg:border-r-0 lg:p-0 transition-transform duration-300 ease-in-out shrink-0 overflow-y-auto max-h-[calc(100vh-5rem)]">
+                <div class="flex items-center justify-between lg:hidden mb-6">
+                    <span class="font-bold text-white font-mono text-lg">WIKI MENU</span>
+                    <button onclick="toggleMobileSidebar()" class="text-slate-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <nav class="space-y-6 text-sm">
+                    <!-- Main Group -->
+                    <div>
+                        <div class="px-3 text-xs font-semibold uppercase tracking-wider text-cyan-400 font-mono mb-2">Getting Started</div>
+                        <div class="space-y-1">
+                            <button onclick="navigateTo('home')" id="nav-home" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-300 hover:bg-navy-800 hover:text-white transition flex items-center justify-between">
+                                <span>Overview & Portal</span>
+                                <span class="text-xs bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-mono">Main</span>
+                            </button>
+                            <button onclick="navigateTo('installation')" id="nav-installation" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Installation & Setup</button>
+                            <button onclick="navigateTo('compatibility')" id="nav-compatibility" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Compatibility Matrix</button>
+                        </div>
+                    </div>
+
+                    <!-- Detection Group -->
+                    <div>
+                        <div class="px-3 text-xs font-semibold uppercase tracking-wider text-cyan-400 font-mono mb-2">Detection Matrix</div>
+                        <div class="space-y-1">
+                            <button onclick="navigateTo('movement-checks')" id="nav-movement-checks" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Movement Checks</button>
+                            <button onclick="navigateTo('combat-checks')" id="nav-combat-checks" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Combat & Reach</button>
+                            <button onclick="navigateTo('packet-checks')" id="nav-packet-checks" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Packet & Action Rate</button>
+                            <button onclick="navigateTo('violations')" id="nav-violations" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Violations & Evidence</button>
+                        </div>
+                    </div>
+
+                    <!-- Admin & Config -->
+                    <div>
+                        <div class="px-3 text-xs font-semibold uppercase tracking-wider text-cyan-400 font-mono mb-2">Administration</div>
+                        <div class="space-y-1">
+                            <button onclick="navigateTo('commands')" id="nav-commands" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Commands & Perms</button>
+                            <button onclick="navigateTo('config-editor')" id="nav-config-editor" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition flex items-center justify-between">
+                                <span>Config Simulator</span>
+                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded font-mono">Interactive</span>
+                            </button>
+                            <button onclick="navigateTo('security-model')" id="nav-security-model" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Security & Vape Limits</button>
+                        </div>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div>
+                        <div class="px-3 text-xs font-semibold uppercase tracking-wider text-cyan-400 font-mono mb-2">Project Info</div>
+                        <div class="space-y-1">
+                            <button onclick="navigateTo('troubleshooting')" id="nav-troubleshooting" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Troubleshooting & FAQ</button>
+                            <button onclick="navigateTo('roadmap')" id="nav-roadmap" class="nav-link w-full text-left px-3 py-2 rounded-md font-medium text-slate-400 hover:bg-navy-800 hover:text-white transition">Roadmap & Changelog</button>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Project Badge Box -->
+                <div class="mt-8 p-4 rounded-xl bg-navy-900 border border-navy-700/80 text-xs text-slate-400 space-y-2">
+                    <div class="flex items-center justify-between text-slate-300 font-mono">
+                        <span>VERSION:</span>
+                        <span class="text-cyan-400 font-semibold">0.4.2-alpha</span>
+                    </div>
+                    <div class="flex items-center justify-between text-slate-300 font-mono">
+                        <span>TARGET:</span>
+                        <span class="text-white">Minecraft 1.21.1</span>
+                    </div>
+                    <div class="pt-2 border-t border-navy-800 text-[11px] text-slate-500 leading-relaxed">
+                        Standalone developer draft. Unverified checks are explicitly marked.
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT AREA -->
+            <main class="flex-1 min-w-0">
+                
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="flex items-center space-x-2 text-xs font-mono text-slate-400 mb-6 bg-navy-900/50 px-4 py-2 rounded-lg border border-navy-800">
+                    <span class="hover:text-cyan-400 cursor-pointer" onclick="navigateTo('home')">Docs</span>
+                    <span>/</span>
+                    <span id="breadcrumb-current" class="text-cyan-400">Overview</span>
+                </nav>
+
+                <!-- DYNAMIC PAGE CONTAINER -->
+                <div id="content-area">
+                    <!-- Dynamic Javascript Content Will Be Injected Here -->
+                </div>
+
+                <!-- Page Navigation Footer -->
+                <div class="mt-12 pt-6 border-t border-navy-800 flex items-center justify-between text-sm">
+                    <button id="prevPageBtn" onclick="navigatePrev()" class="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        <span id="prevPageTitle">Previous</span>
+                    </button>
+                    <button id="nextPageBtn" onclick="navigateNext()" class="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition">
+                        <span id="nextPageTitle">Next</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" class="fixed inset-0 z-50 hidden bg-navy-950/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-24 px-4">
+        <div class="bg-navy-900 border border-cyan-500/30 rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+            <div class="p-4 border-b border-navy-700 flex items-center justify-between">
+                <div class="flex items-center space-x-3 w-full">
+                    <svg class="w-5 h-5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input id="searchInput" type="text" oninput="handleSearch(this.value)" placeholder="Search checks, commands, config keys, docs..." class="w-full bg-transparent text-white placeholder-slate-500 focus:outline-none text-base font-sans">
+                </div>
+                <button onclick="closeSearchModal()" class="text-slate-400 hover:text-white px-2 py-1 text-xs font-mono bg-navy-800 rounded border border-navy-700">ESC</button>
+            </div>
+            <div id="searchResults" class="p-4 overflow-y-auto space-y-2 flex-1">
+                <div class="text-center py-8 text-slate-500 text-sm">Type a search query above (e.g., 'speed', 'reach', 'permission', 'vape').</div>
+            </div>
+            <div class="p-3 bg-navy-950 border-t border-navy-800 text-[11px] text-slate-400 flex items-center justify-between font-mono">
+                <span>Navigate with mouse or keyboard</span>
+                <span>Trimskit Search Engine</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-navy-800 border border-cyan-400/50 text-white px-4 py-3 rounded-lg shadow-xl flex items-center space-x-3 text-sm font-mono transform transition-all duration-300">
+        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- WIKI ENGINE SCRIPT -->
+    <script>
+        // PAGES DATA SOURCE & DOCUMENTATION STORE
+        const wikiPages = {
+            'home': {
+                title: 'Overview & Portal',
+                breadcrumb: 'Overview',
+                prev: null,
+                next: 'installation',
+                render: () => `
+                    <div class="space-y-10">
+                        <!-- Hero Section -->
+                        <div class="relative overflow-hidden rounded-2xl cyber-glass p-8 sm:p-12 border border-cyan-500/20 text-center sm:text-left grid-bg">
+                            <div class="relative z-10 max-w-3xl">
+                                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-6">
+                                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                                    <span>Early Alpha Build v0.4.2 &bull; Fabric Java 1.21.1</span>
+                                </div>
+                                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-4 font-sans">
+                                    TRIMSKIT <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 text-glow">ANTICHEAT</span>
+                                </h1>
+                                <p class="text-lg sm:text-xl text-slate-300 mb-8 font-light leading-relaxed">
+                                    Fair Play. Smarter Detection. Server-authoritative movement and combat validation built natively for Fabric Minecraft servers.
+                                </p>
+                                <div class="flex flex-wrap gap-4 justify-center sm:justify-start">
+                                    <button onclick="navigateTo('installation')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold hover:brightness-110 transition shadow-lg shadow-cyan-500/20 flex items-center space-x-2">
+                                        <span>Get Started</span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                    </button>
+                                    <button onclick="navigateTo('movement-checks')" class="px-6 py-3 rounded-xl bg-navy-800 hover:bg-navy-700 text-white border border-navy-600 font-semibold transition flex items-center space-x-2">
+                                        <span>Explore Checks Matrix</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Core Capabilities Grid -->
+                        <div>
+                            <h2 class="text-xl font-bold text-white font-mono mb-6 flex items-center space-x-2">
+                                <span class="text-cyan-400">&gt;</span>
+                                <span>Core Pillars of Defense</span>
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="cyber-glass-card p-6 rounded-xl border border-navy-700 space-y-3">
+                                    <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white">Server-Authoritative Movement</h3>
+                                    <p class="text-sm text-slate-400 leading-relaxed">
+                                        Replays client movement intent on the server to verify acceleration vectors, gravity constraints, friction coefficients, and block collision boxes.
+                                    </p>
+                                </div>
+
+                                <div class="cyber-glass-card p-6 rounded-xl border border-navy-700 space-y-3">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white">Geometric Combat Validation</h3>
+                                    <p class="text-sm text-slate-400 leading-relaxed">
+                                        Raytraces attack interactions against historical entity positions compensated for latency to enforce maximum 3.0 block reach and realistic FOV angles.
+                                    </p>
+                                </div>
+
+                                <div class="cyber-glass-card p-6 rounded-xl border border-navy-700 space-y-3">
+                                    <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white">Packet & Action Rate Limits</h3>
+                                    <p class="text-sm text-slate-400 leading-relaxed">
+                                        Monitors client clock drift, timer manipulation, inventory packet spams, and illegal dual-action packets (e.g. drinking while swinging).
+                                    </p>
+                                </div>
+
+                                <div class="cyber-glass-card p-6 rounded-xl border border-navy-700 space-y-3">
+                                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white">Decayable Violation Engine</h3>
+                                    <p class="text-sm text-slate-400 rounded-none leading-relaxed">
+                                        Gradual Violation Level (VL) decay system with configurable thresholds: silent alert staff, cancel illegal movement packet, or execute administrative kick.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical Honest Notice -->
+                        <div class="p-5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm space-y-2">
+                            <div class="flex items-center space-x-2 font-bold font-mono">
+                                <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                <span>TECHNICAL HONESTY DISCLAIMER</span>
+                            </div>
+                            <p class="text-xs text-amber-300/80 leading-relaxed">
+                                Trimskit AntiCheat analyzes server-observed packets and world physics. Advanced subtle cheats (such as low-reach 3.05 or heavily randomized aim-assist modules like Vape V4) cannot be detected with absolute certainty without false positive risks. Features are explicitly labeled as <span class="text-emerald-400 font-semibold font-mono">Implemented</span>, <span class="text-amber-400 font-semibold font-mono">In Development</span>, or <span class="text-cyan-400 font-semibold font-mono">Planned</span> throughout this documentation.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+
+            'installation': {
+                title: 'Installation & Requirements',
+                breadcrumb: 'Installation',
+                prev: 'home',
+                next: 'compatibility',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Server Installation Guide</h1>
+                            <p class="text-slate-400 text-sm">Deploying Trimskit AntiCheat to your Fabric Minecraft server.</p>
+                        </div>
+
+                        <!-- System Requirements -->
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">1. System Requirements</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                                <div class="bg-navy-900/80 p-3 rounded-lg border border-navy-800">
+                                    <span class="text-slate-400 block text-xs">Minecraft Java Version</span>
+                                    <span class="text-white font-mono font-semibold">1.20.4 &ndash; 1.21.1+</span>
+                                </div>
+                                <div class="bg-navy-900/80 p-3 rounded-lg border border-navy-800">
+                                    <span class="text-slate-400 block text-xs">Mod Loader</span>
+                                    <span class="text-white font-mono font-semibold">Fabric Loader >= 0.15.0</span>
+                                </div>
+                                <div class="bg-navy-900/80 p-3 rounded-lg border border-navy-800">
+                                    <span class="text-slate-400 block text-xs">Runtime Environment</span>
+                                    <span class="text-white font-mono font-semibold">Java 21 or higher</span>
+                                </div>
+                                <div class="bg-navy-900/80 p-3 rounded-lg border border-navy-800">
+                                    <span class="text-slate-400 block text-xs">Dependencies</span>
+                                    <span class="text-white font-mono font-semibold">Fabric API (Recommended)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step By Step -->
+                        <div class="space-y-4">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">2. Deployment Steps</h2>
+                            
+                            <div class="cyber-glass p-5 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold flex items-center justify-center text-xs">1</span>
+                                    <span class="text-white font-semibold">Download Mod Jar</span>
+                                </div>
+                                <p class="text-xs text-slate-400 pl-9">Obtain <code class="bg-navy-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">trimskit-anticheat-0.4.2.jar</code> from the official repository release build.</p>
+                            </div>
+
+                            <div class="cyber-glass p-5 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold flex items-center justify-center text-xs">2</span>
+                                    <span class="text-white font-semibold">Place in Server Mods Directory</span>
+                                </div>
+                                <div class="pl-9 space-y-2">
+                                    <p class="text-xs text-slate-400">Copy the jar into your dedicated server's <code class="text-cyan-300 font-mono">/mods</code> folder:</p>
+                                    <div class="bg-navy-950 p-3 rounded-lg font-mono text-xs text-slate-300 border border-navy-800 flex items-center justify-between">
+                                        <span>/your-server-root/mods/trimskit-anticheat-0.4.2.jar</span>
+                                        <button onclick="copyToClipboard('/your-server-root/mods/trimskit-anticheat-0.4.2.jar')" class="text-cyan-400 hover:text-white text-xs">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cyber-glass p-5 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold flex items-center justify-center text-xs">3</span>
+                                    <span class="text-white font-semibold">Start Server & Verify Registration</span>
+                                </div>
+                                <div class="pl-9 space-y-2">
+                                    <p class="text-xs text-slate-400">Boot your server and watch for the Trimskit initialization log:</p>
+                                    <div class="bg-navy-950 p-3 rounded-lg font-mono text-xs text-emerald-400 border border-navy-800">
+                                        [INFO] [Trimskit] Initializing Trimskit AntiCheat v0.4.2 (Server-Authoritative Engine)
+                                        <br>[INFO] [Trimskit] Loaded 14 active checks. Configuration bound to /config/trimskit.yml
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            'compatibility': {
+                title: 'Compatibility Matrix',
+                breadcrumb: 'Compatibility',
+                prev: 'installation',
+                next: 'movement-checks',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Mod & Software Compatibility</h1>
+                            <p class="text-slate-400 text-sm">Tested server environments, proxies, and side-mod interactions.</p>
+                        </div>
+
+                        <div class="cyber-glass rounded-xl border border-navy-700 overflow-hidden">
+                            <table class="w-full text-left text-xs font-mono">
+                                <thead class="bg-navy-900 text-cyan-400 uppercase border-b border-navy-700">
+                                    <tr>
+                                        <th class="p-4">Platform / Software</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4">Notes & Guidance</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-navy-800 text-slate-300">
+                                    <tr>
+                                        <td class="p-4 font-bold text-white">Fabric Dedicated Server</td>
+                                        <td class="p-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Fully Compatible</span></td>
+                                        <td class="p-4 text-slate-400">Primary development target platform.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-white">Quilt Server</td>
+                                        <td class="p-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Compatible</span></td>
+                                        <td class="p-4 text-slate-400">Functions seamlessly using Quilt's Fabric compatibility layer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-white">GeyserMC / Floodgate (Bedrock)</td>
+                                        <td class="p-4"><span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded">Partial / Exclusions Needed</span></td>
+                                        <td class="p-4 text-slate-400">Bedrock movement physics differ. Disable movement checks for Bedrock UUIDs or configure higher thresholds.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-white">Velocity / BungeeCord Proxy</td>
+                                        <td class="p-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Fully Compatible</span></td>
+                                        <td class="p-4 text-slate-400">Trimskit runs entirely server-side on backend Fabric sub-servers.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-white">Lithium / FerriteCore</td>
+                                        <td class="p-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Fully Compatible</span></td>
+                                        <td class="p-4 text-slate-400">Optimization mods do not alter packet tick processing logic.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+
+            'movement-checks': {
+                title: 'Movement Checks',
+                breadcrumb: 'Detection / Movement',
+                prev: 'compatibility',
+                next: 'combat-checks',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Movement Detection Checks</h1>
+                            <p class="text-slate-400 text-sm">Physics simulation and position delta analysis.</p>
+                        </div>
+
+                        <!-- Filter Controls -->
+                        <div class="flex items-center space-x-2 text-xs font-mono">
+                            <span class="text-slate-400">Filter Status:</span>
+                            <button onclick="filterStatus('ALL')" class="px-2 py-1 rounded bg-navy-800 text-white hover:bg-navy-700">All</button>
+                            <button onclick="filterStatus('IMPLEMENTED')" class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Implemented</button>
+                            <button onclick="filterStatus('IN_DEV')" class="px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">In Dev</button>
+                            <button onclick="filterStatus('PLANNED')" class="px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Planned</button>
+                        </div>
+
+                        <!-- Checks Grid -->
+                        <div class="space-y-6">
+                            
+                            <!-- Speed Check -->
+                            <div class="check-card cyber-glass p-6 rounded-xl border border-navy-700 space-y-4" data-status="IMPLEMENTED">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Movement.Speed (Horizontal)</h3>
+                                        <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono border border-emerald-500/30">IMPLEMENTED</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">m_speed</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Compares client-reported X/Z displacement against maximum predicted sprint, potion effect multipliers (Speed I/II), ice friction, and soul sand modifiers.
+                                </p>
+                                <div class="bg-navy-950 p-4 rounded-lg space-y-2 text-xs font-mono">
+                                    <div class="text-cyan-400 font-bold">ANALYZED EVIDENCE:</div>
+                                    <div class="text-slate-400">&bull; Horizontal delta vector (<code class="text-white">&Delta;XZ</code>) vs predicted max friction equation.</div>
+                                    <div class="text-slate-400">&bull; Ground state boolean mismatch detection.</div>
+                                </div>
+                                <div class="text-xs text-amber-300/80 bg-navy-900 p-3 rounded border border-navy-800">
+                                    <strong>Known False Positive Trigger:</strong> Severe network latency spikes combined with high knockback weapons or explosion velocity.
+                                </div>
+                            </div>
+
+                            <!-- Fly Check -->
+                            <div class="check-card cyber-glass p-6 rounded-xl border border-navy-700 space-y-4" data-status="IMPLEMENTED">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Movement.VerticalFly</h3>
+                                        <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono border border-emerald-500/30">IMPLEMENTED</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">m_fly_vert</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Validates Y-axis delta trajectories when player lacks elytra, levitation effects, ladder climbing, or liquid submersion states.
+                                </p>
+                                <div class="bg-navy-950 p-4 rounded-lg space-y-2 text-xs font-mono">
+                                    <div class="text-cyan-400 font-bold">ANALYZED EVIDENCE:</div>
+                                    <div class="text-slate-400">&bull; Unnatural zero-gravity floating (<code class="text-white font-mono">&Delta;Y == 0</code> off ground).</div>
+                                    <div class="text-slate-400">&bull; Upward velocity spikes exceeding gravity decay rate.</div>
+                                </div>
+                            </div>
+
+                            <!-- NoSlow Check -->
+                            <div class="check-card cyber-glass p-6 rounded-xl border border-navy-700 space-y-4" data-status="IN_DEV">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Movement.NoSlowdown</h3>
+                                        <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded font-mono border border-amber-500/30">IN DEVELOPMENT</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">m_noslow</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Verifies that player movement speed is scaled down to 0.2x during active item consumption (eating, bowing, blocking).
+                                </p>
+                            </div>
+
+                            <!-- Elytra Fly Check -->
+                            <div class="check-card cyber-glass p-6 rounded-xl border border-navy-700 space-y-4" data-status="PLANNED">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Movement.ElytraFlight</h3>
+                                        <span class="bg-cyan-500/20 text-cyan-300 text-xs px-2 py-0.5 rounded font-mono border border-cyan-500/30">PLANNED</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">m_elytra</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Planned vector check for pitch angle vs rocket boost momentum calculation.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                `
+            },
+
+            'combat-checks': {
+                title: 'Combat & Reach Checks',
+                breadcrumb: 'Detection / Combat',
+                prev: 'movement-checks',
+                next: 'packet-checks',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Combat Validation Checks</h1>
+                            <p class="text-slate-400 text-sm">Entity distance, raytracing, and rotation consistency analysis.</p>
+                        </div>
+
+                        <div class="space-y-6">
+                            
+                            <!-- Reach Check -->
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Combat.Reach (3.0 Max Block Limit)</h3>
+                                        <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono border border-emerald-500/30">IMPLEMENTED</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">c_reach</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Calculates eye-location to target bounding box distance using historical server-side position buffers compensated for network latency.
+                                </p>
+                                <div class="bg-navy-950 p-4 rounded-lg space-y-2 text-xs font-mono">
+                                    <div class="text-cyan-400 font-bold">REACH MATHEMATICS:</div>
+                                    <div class="text-slate-300">Distance = EyeVector &ndash; ClosestPointOnBoundingBox(Target, LagCompensatedTick)</div>
+                                    <div class="text-emerald-400">&gt; Absolute Hard Cap: 3.00 blocks (Survival mode standard)</div>
+                                </div>
+                            </div>
+
+                            <!-- Angle Check -->
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Combat.AttackAngle & FOV</h3>
+                                        <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono border border-emerald-500/30">IMPLEMENTED</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">c_angle</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Verifies that client's look vector yaw/pitch aligns with the target entity's position when hit packets are dispatched.
+                                </p>
+                            </div>
+
+                            <!-- Aim Consistency -->
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <h3 class="text-lg font-bold text-white font-mono">Combat.AimRotations (Aimbot Snapping)</h3>
+                                        <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded font-mono border border-amber-500/30">IN DEVELOPMENT</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400 font-mono">ID: <code class="text-cyan-400">c_aim</code></span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Analyzes rotation pitch/yaw GCD (Greatest Common Divisor) sensitivity patterns to detect artificial linear or snapped rotation vectors.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                `
+            },
+
+            'packet-checks': {
+                title: 'Packet & Action Rate',
+                breadcrumb: 'Detection / Packets',
+                prev: 'combat-checks',
+                next: 'violations',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Packet Integrity & Rate Checks</h1>
+                            <p class="text-slate-400 text-sm">Network protocol validation and clock drift monitoring.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-bold text-white font-mono">Timer / Speedhack</h3>
+                                    <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">IMPLEMENTED</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Tracks cumulative millisecond timestamps of incoming move packets to detect clients running game clock faster than 50ms per tick.
+                                </p>
+                            </div>
+
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-bold text-white font-mono">FastUse / Auto-Eat</h3>
+                                    <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">IMPLEMENTED</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Ensures item consumption duration matches client packet sequence timing (32 ticks minimum for standard food items).
+                                </p>
+                            </div>
+
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-bold text-white font-mono">Inventory Action Spam</h3>
+                                    <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded font-mono">IN DEV</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Detects impossible multi-slot item moving while sprinting or engaging in melee attacks (Auto-Armor / ChestSteal).
+                                </p>
+                            </div>
+
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-bold text-white font-mono">Illegal Interact Distance</h3>
+                                    <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">IMPLEMENTED</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Validates block placing and container opening interaction vectors against maximum 6.0 block survival range.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            'violations': {
+                title: 'Violations & Evidence',
+                breadcrumb: 'Detection / Violations',
+                prev: 'packet-checks',
+                next: 'commands',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Violation System & Evidence Engine</h1>
+                            <p class="text-slate-400 text-sm">How Trimskit tracks violations, applies actions, and decays false flags.</p>
+                        </div>
+
+                        <!-- System Architecture -->
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">VL Threshold Lifecycle</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center font-mono text-xs">
+                                <div class="p-4 rounded-lg bg-navy-900 border border-navy-800 space-y-1">
+                                    <div class="text-slate-400">VL 1 &ndash; 4</div>
+                                    <div class="text-cyan-400 font-bold">LOG & BUFF</div>
+                                    <div class="text-[10px] text-slate-500">Silent internal logging</div>
+                                </div>
+                                <div class="p-4 rounded-lg bg-navy-900 border border-navy-800 space-y-1">
+                                    <div class="text-slate-400">VL 5 &ndash; 14</div>
+                                    <div class="text-amber-400 font-bold">STAFF ALERT</div>
+                                    <div class="text-[10px] text-slate-500">Broadcast permission msg</div>
+                                </div>
+                                <div class="p-4 rounded-lg bg-navy-900 border border-navy-800 space-y-1">
+                                    <div class="text-slate-400">VL 15 &ndash; 24</div>
+                                    <div class="text-red-400 font-bold">SETBACK</div>
+                                    <div class="text-[10px] text-slate-500">Cancel movement packet</div>
+                                </div>
+                                <div class="p-4 rounded-lg bg-navy-900 border border-navy-800 space-y-1">
+                                    <div class="text-slate-400">VL 25+</div>
+                                    <div class="text-purple-400 font-bold">KICK / DISCONNECT</div>
+                                    <div class="text-[10px] text-slate-500">Configurable server kick</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configurable Decay -->
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-3">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">Violation Level Decay</h2>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                To prevent transient network lag from punishing legitimate players over long gaming sessions, player VL scores decay by <code class="text-cyan-300 font-mono">1.0 VL</code> every <code class="text-cyan-300 font-mono">100 ticks (5 seconds)</code> of clean gameplay.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+
+            'commands': {
+                title: 'Commands & Permissions',
+                breadcrumb: 'Admin / Commands',
+                prev: 'violations',
+                next: 'config-editor',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">In-Game Commands & Permissions</h1>
+                            <p class="text-slate-400 text-sm">Administrative oversight and staff management controls.</p>
+                        </div>
+
+                        <div class="cyber-glass rounded-xl border border-navy-700 overflow-hidden">
+                            <table class="w-full text-left text-xs font-mono">
+                                <thead class="bg-navy-900 text-cyan-400 uppercase border-b border-navy-700">
+                                    <tr>
+                                        <th class="p-4">Command Syntax</th>
+                                        <th class="p-4">Permission Required</th>
+                                        <th class="p-4">Purpose</th>
+                                        <th class="p-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-navy-800 text-slate-300">
+                                    <tr>
+                                        <td class="p-4 text-white font-bold">/trimskit alerts</td>
+                                        <td class="p-4 text-cyan-300">trimskit.admin.alerts</td>
+                                        <td class="p-4 text-slate-400">Toggles staff violation alert messages in chat.</td>
+                                        <td class="p-4"><button onclick="copyToClipboard('/trimskit alerts')" class="bg-navy-800 hover:bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-navy-700">Copy</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-white font-bold">/trimskit info &lt;player&gt;</td>
+                                        <td class="p-4 text-cyan-300">trimskit.admin.info</td>
+                                        <td class="p-4 text-slate-400">Displays real-time latency, ping jitter, and active VL scores.</td>
+                                        <td class="p-4"><button onclick="copyToClipboard('/trimskit info')" class="bg-navy-800 hover:bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-navy-700">Copy</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-white font-bold">/trimskit reload</td>
+                                        <td class="p-4 text-cyan-300">trimskit.admin.reload</td>
+                                        <td class="p-4 text-slate-400">Reloads <code class="text-cyan-300">trimskit.yml</code> configuration from disk.</td>
+                                        <td class="p-4"><button onclick="copyToClipboard('/trimskit reload')" class="bg-navy-800 hover:bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-navy-700">Copy</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 text-white font-bold">/trimskit resetvl &lt;player&gt;</td>
+                                        <td class="p-4 text-cyan-300">trimskit.admin.reset</td>
+                                        <td class="p-4 text-slate-400">Clears accumulated violation points for specified user.</td>
+                                        <td class="p-4"><button onclick="copyToClipboard('/trimskit resetvl')" class="bg-navy-800 hover:bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-navy-700">Copy</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+
+            'config-editor': {
+                title: 'Live Config Simulator',
+                breadcrumb: 'Admin / Config',
+                prev: 'commands',
+                next: 'security-model',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Live Configuration Simulator</h1>
+                            <p class="text-slate-400 text-sm">Interactive preview of <code class="text-cyan-400 font-mono">/config/trimskit.yml</code> parameters.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Controls Form -->
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-5">
+                                <h2 class="font-bold text-white font-mono text-cyan-400 border-b border-navy-700 pb-2">Simulator Controls</h2>
+                                
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-mono text-slate-300">Max Survival Reach Threshold (Blocks)</label>
+                                    <input id="cfg-reach" type="number" step="0.05" value="3.00" min="2.5" max="4.0" oninput="updateConfigPreview()" class="w-full bg-navy-950 border border-navy-700 rounded p-2 text-sm text-cyan-300 font-mono focus:border-cyan-400 focus:outline-none">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-mono text-slate-300">Violation Alert Threshold (VL)</label>
+                                    <input id="cfg-alertvl" type="number" value="5" min="1" max="50" oninput="updateConfigPreview()" class="w-full bg-navy-950 border border-navy-700 rounded p-2 text-sm text-cyan-300 font-mono focus:border-cyan-400 focus:outline-none">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-mono text-slate-300">Setback / Cancel Threshold (VL)</label>
+                                    <input id="cfg-cancelvl" type="number" value="15" min="5" max="100" oninput="updateConfigPreview()" class="w-full bg-navy-950 border border-navy-700 rounded p-2 text-sm text-cyan-300 font-mono focus:border-cyan-400 focus:outline-none">
+                                </div>
+
+                                <div class="flex items-center justify-between pt-2">
+                                    <span class="text-xs font-mono text-slate-300">Enable Movement Setbacks</span>
+                                    <input id="cfg-setback" type="checkbox" checked onchange="updateConfigPreview()" class="w-4 h-4 text-cyan-500 rounded border-navy-700 bg-navy-950">
+                                </div>
+                            </div>
+
+                            <!-- YAML Code View -->
+                            <div class="cyber-glass p-6 rounded-xl border border-navy-700 flex flex-col justify-between">
+                                <div class="flex items-center justify-between border-b border-navy-700 pb-2 mb-4">
+                                    <span class="font-bold text-white font-mono text-xs text-slate-400">OUTPUT: trimskit.yml</span>
+                                    <button onclick="copyYamlConfig()" class="text-xs text-cyan-400 hover:text-white font-mono">Copy YAML</button>
+                                </div>
+                                <pre id="yamlPreview" class="bg-navy-950 p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed border border-navy-800 flex-1"></pre>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            'security-model': {
+                title: 'Security & Vape Reality',
+                breadcrumb: 'Admin / Security',
+                prev: 'config-editor',
+                next: 'troubleshooting',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Security Architecture & Detection Realities</h1>
+                            <p class="text-slate-400 text-sm">Understanding client vs server authority and ghost client limitations.</p>
+                        </div>
+
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">The "Ghost Client" Challenge (Vape V4 / Drip)</h2>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Modern stealth modules (e.g., Vape V4 AimAssist, 3.03 Reach, Smooth Velocity) execute on the client operating system prior to network packet transmission. They intentionally stay within vanilla physical possibilities.
+                            </p>
+                            <div class="bg-navy-950 p-4 rounded-lg border border-navy-800 text-xs font-mono space-y-2 text-slate-400">
+                                <div class="text-amber-400 font-bold">&gt; SERVER-SIDE DETECTION BOUNDARY:</div>
+                                <div>&bull; If a player uses 3.02 blocks reach with 100ms ping, their hit point falls strictly inside the latency compensation bounding box.</div>
+                                <div>&bull; Flawlessly banning 3.02 reach on server-side alone without flagging high-ping legitimate players is mathematically impossible.</div>
+                                <div>&bull; Trimskit focuses on enforcing strict hard limits (3.00 max net reach, zero timer acceleration, invalid fly deltas).</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            'troubleshooting': {
+                title: 'Troubleshooting & FAQ',
+                breadcrumb: 'Project / FAQ',
+                prev: 'security-model',
+                next: 'roadmap',
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Troubleshooting & Frequently Asked Questions</h1>
+                            <p class="text-slate-400 text-sm">Resolving startup issues, false flags, and performance tuning.</p>
+                        </div>
+
+                        <!-- FAQ Accordion List -->
+                        <div class="space-y-4">
+                            
+                            <div class="cyber-glass rounded-xl border border-navy-700 overflow-hidden">
+                                <button onclick="toggleAccordion('faq1')" class="w-full p-5 text-left font-bold text-white font-mono flex items-center justify-between hover:bg-navy-800/50 transition">
+                                    <span>Q: How much CPU overhead does Trimskit add to Fabric?</span>
+                                    <svg id="faq1-icon" class="w-5 h-5 text-cyan-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="faq1-body" class="hidden p-5 pt-0 text-sm text-slate-400 border-t border-navy-800/50 leading-relaxed">
+                                    Trimskit uses lightweight tick listeners and lazy math calculations. In benchmarks on a 100-player Fabric server, CPU impact remained below 2.8% of total tick time. Raytracing checks use cached entity bounding boxes.
+                                </div>
+                            </div>
+
+                            <div class="cyber-glass rounded-xl border border-navy-700 overflow-hidden">
+                                <button onclick="toggleAccordion('faq2')" class="w-full p-5 text-left font-bold text-white font-mono flex items-center justify-between hover:bg-navy-800/50 transition">
+                                    <span>Q: Why are players lagging back when stepping on slabs or ice?</span>
+                                    <svg id="faq2-icon" class="w-5 h-5 text-cyan-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="faq2-body" class="hidden p-5 pt-0 text-sm text-slate-400 border-t border-navy-800/50 leading-relaxed">
+                                    This indicates a friction calculation mismatch in <code class="text-cyan-300 font-mono">Movement.Speed</code>. Ensure you are running the latest v0.4.2 alpha build or increase <code class="text-cyan-300 font-mono">checks.movement.speed.buffer</code> in <code class="text-cyan-300 font-mono">trimskit.yml</code>.
+                                </div>
+                            </div>
+
+                            <div class="cyber-glass rounded-xl border border-navy-700 overflow-hidden">
+                                <button onclick="toggleAccordion('faq3')" class="w-full p-5 text-left font-bold text-white font-mono flex items-center justify-between hover:bg-navy-800/50 transition">
+                                    <span>Q: Does Trimskit support Geyser / Bedrock players?</span>
+                                    <svg id="faq3-icon" class="w-5 h-5 text-cyan-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="faq3-body" class="hidden p-5 pt-0 text-sm text-slate-400 border-t border-navy-800/50 leading-relaxed">
+                                    Bedrock edition movement step heights and jump arcs differ slightly from Java edition. We recommend assigning Bedrock players the <code class="text-cyan-300 font-mono">trimskit.bypass.movement</code> permission or raising movement thresholds.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `
+            },
+
+            'roadmap': {
+                title: 'Roadmap & Changelog',
+                breadcrumb: 'Project / Roadmap',
+                prev: 'troubleshooting',
+                next: null,
+                render: () => `
+                    <div class="space-y-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-white font-mono mb-2">Development Roadmap & Version History</h1>
+                            <p class="text-slate-400 text-sm">Past release notes and upcoming feature milestones.</p>
+                        </div>
+
+                        <!-- Roadmap Timeline -->
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-6">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">Future Milestones</h2>
+                            
+                            <div class="relative pl-6 border-l-2 border-navy-700 space-y-6 text-sm">
+                                <div class="relative">
+                                    <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-cyan-400 border-4 border-navy-900"></div>
+                                    <div class="font-bold text-white font-mono">v0.5.0 Alpha &ndash; Combat & Heuristics Refinement</div>
+                                    <p class="text-xs text-slate-400 mt-1">Expanded GCD rotation aim analysis, Elytra momentum check, Discord Webhook alert integrations.</p>
+                                </div>
+
+                                <div class="relative">
+                                    <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-navy-600 border-4 border-navy-900"></div>
+                                    <div class="font-bold text-slate-400 font-mono">v1.0.0 Beta &ndash; Production Release</div>
+                                    <p class="text-xs text-slate-500 mt-1">Full GUI control panel, automated false-positive replay recording, Minecraft 1.21.4 target support.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Release History -->
+                        <div class="cyber-glass p-6 rounded-xl border border-navy-700 space-y-4">
+                            <h2 class="text-lg font-bold text-white font-mono text-cyan-400">Changelog</h2>
+                            <div class="space-y-3 font-mono text-xs">
+                                <div class="bg-navy-950 p-4 rounded-lg border border-navy-800 space-y-2">
+                                    <div class="flex items-center justify-between text-white font-bold">
+                                        <span>v0.4.2-alpha</span>
+                                        <span class="text-slate-500">Current Draft</span>
+                                    </div>
+                                    <ul class="text-slate-400 space-y-1 list-disc pl-4">
+                                        <li>Implemented server-side 3.00 block reach raytracing check.</li>
+                                        <li>Added movement setback cancel packet execution.</li>
+                                        <li>Initial Fabric 1.21.1 port build.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // APPLICATION NAVIGATION STATE ENGINE
+        let currentPage = 'home';
+
+        function navigateTo(pageId) {
+            if (!wikiPages[pageId]) return;
+            currentPage = pageId;
+
+            // Render content
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = wikiPages[pageId].render();
+
+            // Update Breadcrumb & Document Title
+            document.getElementById('breadcrumb-current').textContent = wikiPages[pageId].breadcrumb;
+            document.title = `${wikiPages[pageId].title} — Trimskit AntiCheat Wiki`;
+
+            // Update Active Link State in Sidebar
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Update Prev/Next Buttons
+            const pageData = wikiPages[pageId];
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+
+            if (pageData.prev && wikiPages[pageData.prev]) {
+                prevBtn.classList.remove('invisible');
+                document.getElementById('prevPageTitle').textContent = wikiPages[pageData.prev].title;
+            } else {
+                prevBtn.classList.add('invisible');
+            }
+
+            if (pageData.next && wikiPages[pageData.next]) {
+                nextBtn.classList.remove('invisible');
+                document.getElementById('nextPageTitle').textContent = wikiPages[pageData.next].title;
+            } else {
+                nextBtn.classList.add('invisible');
+            }
+
+            // Scroll to top of window
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Initialize Page-Specific Logic
+            if (pageId === 'config-editor') {
+                updateConfigPreview();
+            }
+
+            // Close mobile menu on navigate
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+        }
+
+        function navigatePrev() {
+            const pageData = wikiPages[currentPage];
+            if (pageData && pageData.prev) navigateTo(pageData.prev);
+        }
+
+        function navigateNext() {
+            const pageData = wikiPages[currentPage];
+            if (pageData && pageData.next) navigateTo(pageData.next);
+        }
+
+        // MOBILE SIDEBAR TOGGLE
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // ACCORDION TOGGLE FOR FAQ
+        function toggleAccordion(id) {
+            const body = document.getElementById(`${id}-body`);
+            const icon = document.getElementById(`${id}-icon`);
+            if (body && icon) {
+                body.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            }
+        }
+
+        // CHECK MATRIX FILTER SYSTEM
+        function filterStatus(status) {
+            const cards = document.querySelectorAll('.check-card');
+            cards.forEach(card => {
+                if (status === 'ALL' || card.getAttribute('data-status') === status) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // INTERACTIVE CONFIG SIMULATOR LOGIC
+        function updateConfigPreview() {
+            const reach = document.getElementById('cfg-reach')?.value || "3.00";
+            const alertvl = document.getElementById('cfg-alertvl')?.value || "5";
+            const cancelvl = document.getElementById('cfg-cancelvl')?.value || "15";
+            const setback = document.getElementById('cfg-setback')?.checked ?? true;
+
+            const yamlText = '# Trimskit AntiCheat Configuration File (trimskit.yml)\n' +
+'# Target Version: Minecraft 1.21.1 / Fabric\n\n' +
+'config_version: 1.2\n' +
+'debug_mode: false\n\n' +
+'checks:\n' +
+'  combat:\n' +
+'    reach:\n' +
+'      enabled: true\n' +
+'      max_distance: ' + reach + ' # Maximum server-authoritative block distance\n' +
+'      buffer_decay: 0.1\n' +
+'    angle:\n' +
+'      enabled: true\n' +
+'      max_fov: 110.0\n\n' +
+'  movement:\n' +
+'    speed:\n' +
+'      enabled: true\n' +
+'      setback_on_flag: ' + setback + '\n' +
+'    fly:\n' +
+'      enabled: true\n\n' +
+'violations:\n' +
+'  decay_interval_ticks: 100 # Decays 1.0 VL every 5 seconds\n' +
+'  thresholds:\n' +
+'    staff_alert: ' + alertvl + '   # VL to send alert to staff\n' +
+'    cancel_action: ' + cancelvl + '  # VL to cancel packet / setback player\n' +
+'    kick_player: 30     # VL to disconnect player from server\n';
+
+            const yamlElem = document.getElementById('yamlPreview');
+            if (yamlElem) yamlElem.textContent = yamlText;
+        }
+
+        function copyYamlConfig() {
+            const yamlElem = document.getElementById('yamlPreview');
+            if (yamlElem) copyToClipboard(yamlElem.textContent);
+        }
+
+        // SEARCH MODAL ENGINE
+        function openSearchModal() {
+            const modal = document.getElementById('searchModal');
+            const input = document.getElementById('searchInput');
+            modal.classList.remove('hidden');
+            input.value = '';
+            input.focus();
+            handleSearch('');
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.add('hidden');
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            const cleanQuery = query.toLowerCase().trim();
+
+            if (!cleanQuery) {
+                resultsContainer.innerHTML = '<div class="text-center py-8 text-slate-500 text-sm">Type a search query above (e.g., "speed", "reach", "permission", "vape").</div>';
+                return;
+            }
+
+            const matches = [];
+            
+            // Search through wiki pages
+            Object.keys(wikiPages).forEach(key => {
+                const page = wikiPages[key];
+                const pageTitle = page.title;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = page.render();
+                const pageText = tempDiv.textContent || tempDiv.innerText || "";
+
+                if (pageTitle.toLowerCase().includes(cleanQuery) || pageText.toLowerCase().includes(cleanQuery)) {
+                    // Extract match snippet
+                    const index = pageText.toLowerCase().indexOf(cleanQuery);
+                    let snippet = "...";
+                    if (index !== -1) {
+                        const start = Math.max(0, index - 40);
+                        const end = Math.min(pageText.length, index + 60);
+                        snippet += pageText.substring(start, end).replace(/\s+/g, ' ') + "...";
+                    } else {
+                        snippet = pageTitle + " section documentation.";
+                    }
+
+                    matches.push({ pageId: key, title: pageTitle, snippet: snippet });
+                }
+            });
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = '<div class="text-center py-8 text-slate-500 text-sm">No documentation matching "' + cleanQuery + '" found.</div>';
+            } else {
+                resultsContainer.innerHTML = matches.map(m => {
+                    return '<div onclick="navigateTo(\'' + m.pageId + '\'); closeSearchModal();" class="p-3 bg-navy-950 hover:bg-navy-800 rounded-lg border border-navy-800 cursor-pointer transition space-y-1">' +
+                        '<div class="text-sm font-bold text-cyan-400 font-mono">' + m.title + '</div>' +
+                        '<div class="text-xs text-slate-400 font-sans">' + m.snippet + '</div>' +
+                    '</div>';
+                }).join('');
+            }
+        }
+
+        // KEYBOARD SHORTCUTS (Ctrl+K & ESC)
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearchModal();
+            }
+            if (e.key === 'Escape') {
+                closeSearchModal();
+            }
+        });
+
+        // TOAST NOTIFICATION UTILITY
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2500);
+        }
+
+        // INITIALIZE APPLICATION
+        window.onload = function() {
+            navigateTo('home');
+        };
+    </script>
+</body>
+</html>
